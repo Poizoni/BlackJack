@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -68,35 +69,35 @@ public class BlackJack implements ActionListener {
 
         deck = new ArrayList<>(51);
         for(int i=2 ; i<11 ; i++) {
-            deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/"+i+"_of_clubs.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+            deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource(i+"_of_clubs.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
         }
         for(int i=2 ; i<11 ; i++) {
-            deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/"+i+"_of_spades.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+            deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource(i+"_of_spades.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
         }
         for(int i=2 ; i<11 ; i++) {
-            deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/"+i+"_of_hearts.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+            deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource(i+"_of_hearts.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
         }
         for(int i=2 ; i<11 ; i++) {
-            deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/"+i+"_of_diamonds.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+            deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource(i+"_of_diamonds.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
         }
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/ace_of_clubs.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/ace_of_diamonds.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/ace_of_hearts.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/ace_of_spades.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/jack_of_clubs.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/jack_of_diamonds.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/jack_of_hearts.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/jack_of_spades.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/king_of_clubs.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/king_of_diamonds.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/king_of_hearts.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/king_of_spades.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/queen_of_clubs.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/queen_of_diamonds.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/queen_of_hearts.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/queen_of_spades.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("ace_of_clubs.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("ace_of_diamonds.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("ace_of_hearts.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("ace_of_spades.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("jack_of_clubs.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("jack_of_diamonds.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("jack_of_hearts.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("jack_of_spades.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("king_of_clubs.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("king_of_diamonds.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("king_of_hearts.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("king_of_spades.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("queen_of_clubs.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("queen_of_diamonds.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("queen_of_hearts.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("queen_of_spades.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
         // blank card
-        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/blankCard.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+        deck.add(new JLabel(new ImageIcon (new ImageIcon(ClassLoader.getSystemResource("blankCard.png")).getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
 
         frame = new JFrame("BlackJack");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
