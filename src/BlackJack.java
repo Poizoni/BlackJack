@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Random;
 
 public class BlackJack implements ActionListener {
 
@@ -24,13 +23,10 @@ public class BlackJack implements ActionListener {
     JButton hitButton;
     JButton standButton;
     JButton dealButton;
+    JButton restartButton;
 
     HashMap<Integer, Integer> cardValues = new HashMap<>();
     ArrayList<Integer> numList = new ArrayList<Integer>(51);
-
-    Random random;
-
-    final int CARD_AMOUNT = 51;
 
     Color   btnColor = new Color(34,37,45),
             fieldColor = new Color(39,43,51),
@@ -40,7 +36,8 @@ public class BlackJack implements ActionListener {
             clickColor = new Color(48, 49, 54);
 
     BlackJack() {
-        random = new Random();
+
+        UIManager.put("Button.select", clickColor);
 
         for(int i=0; i<51;i++) {
             numList.add(i);
@@ -102,7 +99,6 @@ public class BlackJack implements ActionListener {
 
         deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/blankCard.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
 
-
         frame = new JFrame("BlackJack");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 700);
@@ -113,13 +109,11 @@ public class BlackJack implements ActionListener {
 
         playerPanel = new JPanel();
         playerPanel.setLayout(new GridLayout(2,3,8,8));
-            // playerPanel.add(deck.get(0));
         playerPanel.setBounds(0,150,400,400);
         playerPanel.setBackground(fieldColor);
 
         dealerPanel = new JPanel();
         dealerPanel.setLayout(new GridLayout(2,3,8,8));
-            // dealerPanel.add(deck.get(5));
         dealerPanel.setBounds(585,150,400,400);
         dealerPanel.setBackground(fieldColor);
 
@@ -149,8 +143,17 @@ public class BlackJack implements ActionListener {
         dealButton.setFocusable(false);
         dealButton.setBackground(btnColor);
         dealButton.setForeground(textColor);
-        dealButton.setBounds(425,20,130,80);
+        dealButton.setBounds(425,60,130,80);
         dealButton.setBorder(BorderFactory.createEmptyBorder());
+
+        restartButton = new JButton("restart");
+        restartButton.addActionListener(this);
+        restartButton.setFont(new Font("Arial", Font.BOLD, 15));
+        restartButton.setFocusable(false);
+        restartButton.setBackground(btnColor);
+        restartButton.setForeground(textColor);
+        restartButton.setBounds(459,20,60,30);
+        restartButton.setBorder(BorderFactory.createEmptyBorder());
 
         playerScoreLabel = new JLabel();
         playerScoreLabel.setText(playerScore + "  player");
@@ -168,7 +171,7 @@ public class BlackJack implements ActionListener {
         gameOverLabel.setText("game over");
         gameOverLabel.setFont(new Font("Arial", Font.BOLD, 70));
         gameOverLabel.setBounds(320,560,400,90);
-        gameOverLabel.setForeground(textColor);
+        gameOverLabel.setForeground(redTextColor);
         gameOverLabel.setVisible(false);
 
         frame.add(playerPanel);
@@ -176,6 +179,7 @@ public class BlackJack implements ActionListener {
         frame.add(hitButton);
         frame.add(standButton);
         frame.add(dealButton);
+        frame.add(restartButton);
         frame.add(playerScoreLabel);
         frame.add(dealerScoreLabel);
         frame.add(gameOverLabel);
@@ -269,6 +273,9 @@ public class BlackJack implements ActionListener {
             frame.revalidate();
             frame.repaint();
         }
+        if(e.getSource()==restartButton) {
+            restart();
+        }
 
     }
     public void checkBust() {
@@ -304,5 +311,30 @@ public class BlackJack implements ActionListener {
             gameOverLabel.setVisible(true);
 
         }
+    }
+    public void restart() {
+        Collections.shuffle(numList);
+
+        playerScore = 0;
+        dealerScore = 0;
+        playerScoreLabel.setText(playerScore + "  player");
+        dealerScoreLabel.setText("dealer  " + dealerScore);
+        dealButton.setVisible(true);
+        gameOverLabel.setVisible(false);
+        hitButton.setVisible(false);
+        standButton.setVisible(false);
+        playerPanel.removeAll();
+        dealerPanel.removeAll();
+
+        playerScoreLabel.revalidate();
+        playerScoreLabel.repaint();
+        playerPanel.revalidate();
+        playerPanel.repaint();
+        dealerScoreLabel.revalidate();
+        dealerScoreLabel.repaint();
+        dealerPanel.revalidate();
+        dealerPanel.repaint();
+        frame.revalidate();
+        frame.repaint();
     }
 }
