@@ -19,6 +19,8 @@ public class BlackJack implements ActionListener {
     JLabel dealerScoreLabel;
     int dealerScore = 0;
 
+    JLabel gameOverLabel;
+
     JButton hitButton;
     JButton standButton;
     JButton dealButton;
@@ -98,6 +100,8 @@ public class BlackJack implements ActionListener {
         deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/queen_of_hearts.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
         deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/queen_of_spades.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
 
+        deck.add(new JLabel(new ImageIcon (new ImageIcon("src/cards/blankCard.png").getImage().getScaledInstance(130, 200, Image.SCALE_DEFAULT))));
+
 
         frame = new JFrame("BlackJack");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -160,6 +164,13 @@ public class BlackJack implements ActionListener {
         dealerScoreLabel.setBounds(620,50,400,60);
         dealerScoreLabel.setForeground(textColor);
 
+        gameOverLabel = new JLabel();
+        gameOverLabel.setText("game over");
+        gameOverLabel.setFont(new Font("Arial", Font.BOLD, 70));
+        gameOverLabel.setBounds(320,560,400,90);
+        gameOverLabel.setForeground(textColor);
+        gameOverLabel.setVisible(false);
+
         frame.add(playerPanel);
         frame.add(dealerPanel);
         frame.add(hitButton);
@@ -167,6 +178,7 @@ public class BlackJack implements ActionListener {
         frame.add(dealButton);
         frame.add(playerScoreLabel);
         frame.add(dealerScoreLabel);
+        frame.add(gameOverLabel);
         frame.setVisible(true);
     }
 
@@ -185,10 +197,11 @@ public class BlackJack implements ActionListener {
             playerPanel.revalidate();
             playerPanel.repaint();
 
-            dealerPanel.add(deck.get(numList.get(2)));
+            // dealerPanel.add(deck.get(numList.get(2)));
+            dealerPanel.add(deck.get(52));
             dealerPanel.add(deck.get(numList.get(3)));
 
-            dealerScore += cardValues.get(numList.get(2));
+            // dealerScore += cardValues.get(numList.get(2));
             dealerScore += cardValues.get(numList.get(3));
             dealerScoreLabel.setText("dealer  " + dealerScore);
             dealerScoreLabel.revalidate();
@@ -201,6 +214,7 @@ public class BlackJack implements ActionListener {
             standButton.setVisible(true);
 
             checkBust();
+            checkWin();
 
             frame.revalidate();
             frame.repaint();
@@ -218,24 +232,77 @@ public class BlackJack implements ActionListener {
             playerScoreLabel.setText(playerScore + "  player");
 
             checkBust();
+            checkWin();
 
             playerScoreLabel.revalidate();
             playerScoreLabel.repaint();
             playerPanel.revalidate();
             playerPanel.repaint();
+            frame.revalidate();
+            frame.repaint();
 
         }
         if(e.getSource()==standButton) {
+            dealerPanel.remove(deck.get(52));
+            if(dealerScore>playerScore) {
+                dealerPanel.add(deck.get(numList.get(2)));
 
+            }else {
+                if(deck.get(numList.get(50)).getParent() == dealerPanel) {
+                    dealerPanel.add(deck.get(numList.get(49)));
+                    dealerScore += cardValues.get(numList.get(49));
+                    dealerScoreLabel.setText("dealer  " + dealerScore);
+                }
+                dealerPanel.add(deck.get(numList.get(50)));
+                dealerScore += cardValues.get(numList.get(50));
+            }
+
+            dealerScoreLabel.setText("dealer  " + dealerScore);
+
+            checkBust();
+            checkWin();
+
+            dealerScoreLabel.revalidate();
+            dealerScoreLabel.repaint();
+            dealerPanel.revalidate();
+            dealerPanel.repaint();
+            frame.revalidate();
+            frame.repaint();
         }
 
     }
     public void checkBust() {
         if(playerScore>21) {
-            System.out.println("player bust");
+            hitButton.setVisible(false);
+            standButton.setVisible(false);
+
+            gameOverLabel.setText("you lose");
+            gameOverLabel.setVisible(true);
         }
         if(dealerScore>21) {
-            System.out.println("dealer bust");
+            hitButton.setVisible(false);
+            standButton.setVisible(false);
+
+            gameOverLabel.setText("you win");
+            gameOverLabel.setVisible(true);
+
+        }
+    }
+    public void checkWin() {
+        if(playerScore==21) {
+            hitButton.setVisible(false);
+            standButton.setVisible(false);
+
+            gameOverLabel.setText("you win");
+            gameOverLabel.setVisible(true);
+        }
+        if(dealerScore==21) {
+            hitButton.setVisible(false);
+            standButton.setVisible(false);
+
+            gameOverLabel.setText("you lose");
+            gameOverLabel.setVisible(true);
+
         }
     }
 }
